@@ -87,9 +87,9 @@ namespace MyUserPlugins
                 rdcProcess.Start();
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw new Exception(ex.Message);
             }
             #region
             //Process rdcProcess = new Process();
