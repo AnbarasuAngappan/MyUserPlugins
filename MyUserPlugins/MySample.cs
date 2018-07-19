@@ -71,9 +71,8 @@ namespace MyUserPlugins
            
         //}
 
-        public static void LaunchRemoteDesktop(string Username, string IPAddress, string Password)
+        public void LaunchRemoteDesktop(string Username, string IPAddress, string Password)
         {
-
             try
             {
                 Process rdcProcess = new Process();
@@ -83,9 +82,8 @@ namespace MyUserPlugins
                 rdcProcess.Start();
 
                 rdcProcess.StartInfo.FileName = Environment.ExpandEnvironmentVariables(@"%SystemRoot%\system32\mstsc.exe");
-                rdcProcess.StartInfo.Arguments = "/v " + IPAddress; 
+                rdcProcess.StartInfo.Arguments = "/v " + IPAddress;                
                 rdcProcess.Start();
-
             }
             catch (Exception ex)
             {
@@ -154,19 +152,19 @@ namespace MyUserPlugins
         {
             try
             {
-                Process[] my = Process.GetProcessesByName("mstsc");
-                if(my !=null && my.Length > 0)
+                Process[] RDPprocess = Process.GetProcessesByName("mstsc");
+                if(RDPprocess != null && RDPprocess.Length > 0)
                 {
-                    int pid = my[0].Id;
-                    Process pro = Process.GetProcessById(pid);
-                    pro.Kill();
+                    int RDPId = RDPprocess[0].Id;
+                    Process process = Process.GetProcessById(RDPId);
+                    process.Kill();
                 }               
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
-        }
+        }      
 
     }
 }
